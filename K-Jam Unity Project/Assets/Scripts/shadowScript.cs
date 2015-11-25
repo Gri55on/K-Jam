@@ -38,10 +38,10 @@ public class shadowScript : MonoBehaviour {
 			}
 		}
 
-		this.transform.position = shadow.transform.position + new Vector3 (0.0f, height);
+		this.transform.position = shadow.transform.position + new Vector3 (0.0f, 1.0f);
 		this.transform.rotation = shadow.transform.rotation;
 
-		Vector2.SqrMagnitude (shadow.rigidbody2D.velocity);
+		Vector2.SqrMagnitude (shadow.GetComponent<Rigidbody2D>().velocity);
 
 
 	}

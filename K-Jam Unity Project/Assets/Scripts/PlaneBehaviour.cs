@@ -5,38 +5,41 @@ public class PlaneBehaviour : MonoBehaviour {
 
 	public Vector2 forwardForce;
 	public float tourqe;
+	float tourqeAmount;
 	float lastTourqe;
 
 
 	// Use this for initialization
 	void Start () {
 
-		forwardForce = Vector2.zero;
+		//forwardForce = Vector2.zero;
 		tourqe = 0.0f;	
+		tourqeAmount = 0.7f;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-
+		//Movement
 		if (Input.GetKey (KeyCode.UpArrow))
 		{
-			forwardForce = this.transform.right;
+			//forwardForce = this.transform.right;
 		}
+		forwardForce = this.transform.right;
 		if(Input.GetKey (KeyCode.LeftArrow))
 		{
-			tourqe = 1.0f;
-			lastTourqe = 1.0f;
+			tourqe = tourqeAmount;
+			lastTourqe = tourqeAmount;
 		}
 		if (Input.GetKey (KeyCode.RightArrow))
 		{
-			tourqe = -1.0f;
-			lastTourqe = 1.0f;
+			tourqe = -tourqeAmount;
+			lastTourqe = -tourqeAmount;
 		}
 
-
-		this.rigidbody2D.AddForce (forwardForce);
-		this.rigidbody2D.AddTorque (tourqe);
+		this.GetComponent<Rigidbody2D>().AddForce (forwardForce);
+		this.GetComponent<Rigidbody2D>().AddTorque (tourqe);
 		if (forwardForce.x > 0) 
 		{
 			forwardForce.x -= Time.deltaTime;
@@ -66,6 +69,16 @@ public class PlaneBehaviour : MonoBehaviour {
 		{
 			tourqe = 0.0f;
 		}
+
+
+		//Dropping bombs
+		if(Input.GetKeyDown(KeyCode.Space))
+		{
+			GameObject instantiatedObj = (GameObject)Instantiate(Resources.Load("Bomb"),this.transform.position + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
+			instantiatedObj.GetComponent<ProjectileScript>().setVariables(this.transform.position);
+
+		}
+
 	
 	}
 }
