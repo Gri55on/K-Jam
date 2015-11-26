@@ -4,9 +4,9 @@ using System.Collections;
 public class AsteroidSpawn : MonoBehaviour 
 {
 
-	//Asteroid asteroidScript;	//The asteroid script (Handles Velocity)
-	GameObject[] asteroids;		//List of all asteroids in the scene
-	GameObject asteroid;	//The asteroid gameobject to be spawned
+	Asteroid asteroidScript;	    //The asteroid script on the gameobject spawned (Handles Velocity)
+	GameObject[] asteroidList;		//List of all asteroids in the scene
+	GameObject asteroid;	        //The asteroid gameobject to be instansiated
 	public int amount, minPos, maxPos, minspeed, maxSpeed;
 	public Vector3 Velocity;
 
@@ -20,17 +20,15 @@ public class AsteroidSpawn : MonoBehaviour
 		//Spawns a number of asteroids (i)
 		for (int i = 0; i < amount; i++) 
 		{
-			asteroids[i] = Instantiate(asteroid, RandomPos(), Quaternion.identity) as GameObject;
+			asteroidList[i] = Instantiate(asteroid, RandomPos(), Quaternion.identity) as GameObject;
 		}
 
-
-
 		//Set the velocity for each asteroid in the asteroids array
-		/*foreach (GameObject ast in asteroids) 
+		foreach (GameObject ast in asteroidList) 
 		{
-			asteroidScript = ast.GetComponents<Asteroid>();
-			asteroidScript.Velocity = RandomVel();
-		}*/
+            asteroidScript = ast.GetComponent<Asteroid>();
+            asteroidScript.Velocity = RandomVel();
+		}
 	}
 
 	//Returns a random position within the min/max position values
@@ -43,7 +41,7 @@ public class AsteroidSpawn : MonoBehaviour
 		return new Vector3 (x,y,z);
 	}
 
-	//Returns a random velocity between 
+	//Returns a random velocity between the min/max speed
 	Vector3 RandomVel()
 	{
 		int x, y, z;
@@ -51,10 +49,5 @@ public class AsteroidSpawn : MonoBehaviour
 		y = UnityEngine.Random.Range (minspeed, maxSpeed);
 		z = 0;
 		return new Vector3 (x, y, z);
-	}
-
-	void update()
-	{
-		this.transform.position += RandomVel;
 	}
 }
