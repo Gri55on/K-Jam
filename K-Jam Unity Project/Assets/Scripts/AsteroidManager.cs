@@ -1,27 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class AsteroidSpawn : MonoBehaviour 
+public class AsteroidManager : MonoBehaviour 
 {
-
-	Asteroid asteroidScript;	    //The asteroid script on the gameobject spawned (Handles Velocity)
-	GameObject[] asteroidList;		//List of all asteroids in the scene
-	public GameObject asteroid;	        //The asteroid gameobject to be instansiated
+    List<GameObject> asteroidList = new List<GameObject>();     //List of asteroids
+	Asteroid asteroidScript;	                                //The asteroid script on the gameobject spawned (Handles Velocity)
+	public GameObject asteroid;	                                //The asteroid gameobject to be instansiated
 	public Vector3 Velocity;
     public int amount, minPos, maxPos, minspeed, maxSpeed;
 
 	void Start()
 	{
+        
 		Spawn ();
 	}
 
 	void Spawn()
 	{
-        asteroidList = new GameObject[amount]; 
 		//Spawns a number of asteroids (i)
 		for (int i = 0; i < amount; i++) 
 		{
-			asteroidList[i] = GameObject.Instantiate(asteroid, RandomPos(), Quaternion.identity) as GameObject;
+           GameObject newAsteroid = (GameObject)Instantiate(asteroid, RandomPos(), Quaternion.identity);
+           asteroidList.Add(newAsteroid);
 		}
 
 		//Set the velocity for each asteroid in the asteroids array
@@ -31,6 +32,12 @@ public class AsteroidSpawn : MonoBehaviour
             asteroidScript.Velocity = RandomVel();
 		}
 	}
+
+    //Splits the asteroid and spawns two smaller asteroids
+    void asteroidSplit(GameObject asteroidToSplit)
+    {
+        
+    }
 
 	//Returns a random position within the min/max position values
 	Vector3 RandomPos()
