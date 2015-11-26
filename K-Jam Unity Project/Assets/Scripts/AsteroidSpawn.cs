@@ -8,7 +8,8 @@ public class AsteroidSpawn : MonoBehaviour
 	GameObject[] asteroidList;		//List of all asteroids in the scene
 	public GameObject asteroid;	        //The asteroid gameobject to be instansiated
 	public Vector3 Velocity;
-    public int amount, minPos, maxPos, minspeed, maxSpeed;
+	public int amount;
+    public float minPos, maxPos, minspeed, maxSpeed;
 
 	void Start()
 	{
@@ -35,7 +36,7 @@ public class AsteroidSpawn : MonoBehaviour
 	//Returns a random position within the min/max position values
 	Vector3 RandomPos()
 	{
-		int x, y, z;
+		float x, y, z;
 		x = UnityEngine.Random.Range (minPos, maxPos);
 		y = UnityEngine.Random.Range (minPos, maxPos);
 		z = 0;
@@ -45,7 +46,7 @@ public class AsteroidSpawn : MonoBehaviour
 	//Returns a random velocity between the min/max speed
 	Vector3 RandomVel()
 	{
-		int x, y, z;
+		float x, y, z;
 		x = UnityEngine.Random.Range (minspeed, maxSpeed);
 		y = UnityEngine.Random.Range (minspeed, maxSpeed);
 		z = 0;
