@@ -6,9 +6,9 @@ public class AsteroidSpawn : MonoBehaviour
 
 	Asteroid asteroidScript;	    //The asteroid script on the gameobject spawned (Handles Velocity)
 	GameObject[] asteroidList;		//List of all asteroids in the scene
-	GameObject asteroid;	        //The asteroid gameobject to be instansiated
-	public int amount, minPos, maxPos, minspeed, maxSpeed;
+	public GameObject asteroid;	        //The asteroid gameobject to be instansiated
 	public Vector3 Velocity;
+    public int amount, minPos, maxPos, minspeed, maxSpeed;
 
 	void Start()
 	{
@@ -17,10 +17,11 @@ public class AsteroidSpawn : MonoBehaviour
 
 	void Spawn()
 	{
+        asteroidList = new GameObject[amount]; 
 		//Spawns a number of asteroids (i)
 		for (int i = 0; i < amount; i++) 
 		{
-			asteroidList[i] = Instantiate(asteroid, RandomPos(), Quaternion.identity) as GameObject;
+			asteroidList[i] = GameObject.Instantiate(asteroid, RandomPos(), Quaternion.identity) as GameObject;
 		}
 
 		//Set the velocity for each asteroid in the asteroids array
