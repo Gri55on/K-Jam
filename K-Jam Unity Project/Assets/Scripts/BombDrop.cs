@@ -10,7 +10,7 @@ public class BombDrop : MonoBehaviour
 	
 	void OnTriggerEnter2D(Collider2D inCollider)
 	{
-		if (inCollider.gameObject.tag == "Building") 
+		if (inCollider.gameObject.tag == "Bomb") 
 		{
 			Destroy(this.gameObject);
 		}
