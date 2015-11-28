@@ -8,7 +8,8 @@ public class AsteroidManager : MonoBehaviour
 	Asteroid asteroidScript;	                                //The asteroid script on the gameobject spawned (Handles Velocity)
 	public GameObject asteroid;	                                //The asteroid gameobject to be instansiated
 	public Vector3 Velocity;
-    public int amount, minPos, maxPos, minspeed, maxSpeed;
+    public int amount, minPos, maxPos, minspeed, maxSpeed,split;
+
 
 	void Start()
 	{
@@ -33,10 +34,18 @@ public class AsteroidManager : MonoBehaviour
 		}
 	}
 
-    //Splits the asteroid and spawns two smaller asteroids
+    //Splits the asteroid and spawns a number of smaller asteroids 
     void asteroidSplit(GameObject asteroidToSplit)
     {
-        
+        for (int i = 0; i < split; i++)
+        {
+            //Spawn new asteroids and add them to the list
+            GameObject addedAsteroiid = GameObject.Instantiate(asteroid, asteroidToSplit.transform.position, Quaternion.identity) as GameObject;
+            asteroidList.Add(addedAsteroiid);
+        }
+        //Remove asteroid from list then destroy it
+        asteroidList.Remove(asteroidToSplit);
+        GameObject.Destroy(asteroidToSplit);
     }
 
 	//Returns a random position within the min/max position values
