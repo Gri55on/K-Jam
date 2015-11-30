@@ -14,7 +14,7 @@ public class SpaceshipBehaviour : MonoBehaviour {
 		
 		//forwardForce = Vector2.zero;
 		tourqe = 0.0f;	
-		tourqeAmount = 0.7f;
+		tourqeAmount = 0.1f;
 		xr = Random.Range(-4.5f, 4.5f);
 		yr = Random.Range(-4.5f, 4.5f);
 	}
@@ -27,18 +27,13 @@ public class SpaceshipBehaviour : MonoBehaviour {
 		{
 			forwardForce = this.transform.right;
 		}
-		//forwardForce = this.transform.right;
 		if(Input.GetKey (KeyCode.LeftArrow))
 		{
-			//transform.rotate = new Vector3(5.0f,0.0f,0.0f);
-			//tourqe = tourqeAmount;
-			//lastTourqe = tourqeAmount;
+			transform.Rotate(0,0,Input.GetAxis("Horizontal") * Time.deltaTime * -540);
 		}
 		if (Input.GetKey (KeyCode.RightArrow))
 		{
-			//this.transform.rotation = this.transform.rotation.z + 5.0f;//Quaternion.Euler(0.0f,0.0f,5.0f);
-			//tourqe = -tourqeAmount;
-			//lastTourqe = -tourqeAmount;
+			transform.Rotate(0,0,Input.GetAxis("Horizontal") * Time.deltaTime * -540);
 		}
 
 		//Hyperspace
@@ -69,7 +64,7 @@ public class SpaceshipBehaviour : MonoBehaviour {
 			forwardForce.y = 0;
 		}
 		
-		if (lastTourqe == 1.0f && tourqe > 0)
+		if (lastTourqe ==1.0f && tourqe > 0)
 		{
 			tourqe -= Time.deltaTime;
 		} 
@@ -86,8 +81,9 @@ public class SpaceshipBehaviour : MonoBehaviour {
 		//Dropping bombs
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
-			GameObject instantiatedObj = (GameObject)Instantiate(Resources.Load("Bomb"),this.transform.position + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
+			GameObject instantiatedObj = (GameObject)Instantiate(Resources.Load("Bomb"),this.transform.position + new Vector3(0.0f, 1.0f, 0.0f), this.transform.rotation);
 			instantiatedObj.GetComponent<ProjectileScript>().setVariables(this.transform.position);
+			//instantiatedObj.GetComponent<ProjectileScript>().setVariables(this.transform.localRotation);
 			
 		}
 		
