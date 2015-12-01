@@ -72,7 +72,7 @@ public class PlaneBehaviourPlayer3 : MonoBehaviour
 			
 			
 			//Dropping bombs
-			if(Input.GetKeyDown(KeyCode.E))
+			if(Input.GetKeyDown(KeyCode.LeftShift))
 			{
 				GameObject instantiatedObj = (GameObject)Instantiate(Resources.Load("Bomb"),this.transform.position + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
 				instantiatedObj.GetComponent<ProjectileScript>().setVariables(this.transform.position);
