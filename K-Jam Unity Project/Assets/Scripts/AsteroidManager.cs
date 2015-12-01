@@ -36,7 +36,7 @@ public class AsteroidManager : MonoBehaviour
         {
             asteroidScript = ast.GetComponent<Asteroid>();
             asteroidScript.Velocity = RandomVel();
-            asteroidScript.Size = 0.5f;
+            asteroidScript.Size = 1;
         }
     }
 

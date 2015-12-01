@@ -3,8 +3,9 @@ using System.Collections;
 
 public class Asteroid : MonoBehaviour 
 {
+    //Assigned in Asteroid manager, initialized for redundancy
 	public Vector3 Velocity = new Vector3(0,0,0);
-    public float Size = 0.1f;
+    public float Size = 1f; 
 
 
     void Start()
