@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 public class AsteroidManager : MonoBehaviour
 {
-    List<GameObject> asteroidList = new List<GameObject>();     	//List of asteroids
+    List<GameObject> asteroidList = new List<GameObject>();     //List of asteroids
     Asteroid asteroidScript;	                                //The asteroid script on the gameobject spawned (Handles Velocity)
     public GameObject asteroid;	                                //The asteroid gameobject to be instansiated
     public Vector3 Velocity;
     public int amount, split;
-    public float minPos, maxPos, minspeed, maxSpeed;
+    public float minPos, maxPos, minspeed, maxSpeed, minSize;
 
 
     void Start()
@@ -19,7 +19,7 @@ public class AsteroidManager : MonoBehaviour
 
     void Update()
     {
-        //Split Detection here 
+
     }
 
     void Spawn()
@@ -43,11 +43,18 @@ public class AsteroidManager : MonoBehaviour
     //Splits the asteroid and spawns a number of smaller asteroids 
     void asteroidSplit(GameObject asteroidToSplit)
     {
-        for (int i = 0; i < split; i++)
+        //Only splits asteroids above a certain size
+        if (asteroidToSplit.GetComponent<Asteroid>().Size > minSize)
         {
-            //Spawn new asteroids and add them to the list
-            GameObject addedAsteroiid = GameObject.Instantiate(asteroid, asteroidToSplit.transform.position, Quaternion.identity) as GameObject;
-            asteroidList.Add(addedAsteroiid);
+            for (int i = 0; i < split; i++)
+            {
+                //Spawn new asteroids and add them to the list
+                GameObject addedAsteroid = GameObject.Instantiate(asteroid, asteroidToSplit.transform.position, Quaternion.identity) as GameObject;
+                //Sets the size of new asteroid to be half the size of the parent
+                addedAsteroid.GetComponent<Asteroid>().Size = (asteroidToSplit.GetComponent<Asteroid>().Size / 2);
+                asteroidList.Add(addedAsteroid);
+
+            }
         }
 
         //Remove asteroid from list then destroy it

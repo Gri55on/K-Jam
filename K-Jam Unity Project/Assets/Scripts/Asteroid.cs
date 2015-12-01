@@ -5,7 +5,7 @@ public class Asteroid : MonoBehaviour
 {
     //Assigned in Asteroid manager, initialized for redundancy
 	public Vector3 Velocity = new Vector3(0,0,0);
-    public float Size = 1f; 
+    public float Size = 1.0f; 
 
 
     void Start()
@@ -19,6 +19,21 @@ public class Asteroid : MonoBehaviour
         Velocity = new Vector3(Velocity.x / Size, Velocity.y / Size, 0);
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        //Destroy bullets that colide with the asteroid
+        if ( other.tag == "Bullet")
+        {
+            Destroy(other.gameObject);
+        }
+        //Kill the player if it collides with the asteroid
+        else if (other.tag == "Player")
+        {
+            //kil player, lives etc
+        }
+        //Call asteroid split here
+
+    }
 
 	void Update ()
 	{

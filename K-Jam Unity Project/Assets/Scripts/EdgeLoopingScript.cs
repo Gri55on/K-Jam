@@ -19,6 +19,7 @@ public class EdgeLoopingScript : MonoBehaviour
 	
 	}
 
+    //If the object leaves the play area collider transport it to the other side of the collider
 	void OnTriggerExit2D(Collider2D collision) 
 	{
 		if(collision.transform.position.x >= this.transform.position.x + (this.transform.localScale.x/2))

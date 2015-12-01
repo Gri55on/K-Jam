@@ -11,18 +11,16 @@ public class PlaneBehaviourPlayer4 : MonoBehaviour
 		
 		// Use this for initialization
 		void Start () 
-	{
+	    {
 			
 			//forwardForce = Vector2.zero;
 			tourqe = 0.0f;	
 			tourqeAmount = 0.7f;
-			
 		}
 		
 		// Update is called once per frame
 		void Update () 
 		{
-			
 			//Movement
 			if (Input.GetKey (KeyCode.O))
 			{
@@ -34,7 +32,7 @@ public class PlaneBehaviourPlayer4 : MonoBehaviour
 				tourqe = tourqeAmount;
 				lastTourqe = tourqeAmount;
 			}
-		if (Input.GetKey (KeyCode.Semicolon))
+		    if (Input.GetKey (KeyCode.Semicolon))
 			{
 				tourqe = -tourqeAmount;
 				lastTourqe = -tourqeAmount;
