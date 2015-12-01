@@ -2,11 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class EdgeLoopingScript : MonoBehaviour {
+public class EdgeLoopingScript : MonoBehaviour 
+{
 
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+    {
 
 	}
 	

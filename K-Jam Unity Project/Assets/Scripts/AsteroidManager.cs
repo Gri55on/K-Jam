@@ -14,8 +14,12 @@ public class AsteroidManager : MonoBehaviour
 
     void Start()
     {
-
         Spawn();
+    }
+
+    void Update()
+    {
+        //Split Detection here 
     }
 
     void Spawn()
@@ -32,6 +36,7 @@ public class AsteroidManager : MonoBehaviour
         {
             asteroidScript = ast.GetComponent<Asteroid>();
             asteroidScript.Velocity = RandomVel();
+            asteroidScript.Size = 0.5f;
         }
     }
 
