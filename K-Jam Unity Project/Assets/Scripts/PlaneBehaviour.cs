@@ -7,6 +7,7 @@ public class PlaneBehaviour : MonoBehaviour {
 	public float tourqe;
 	float tourqeAmount;
 	float lastTourqe;
+	public int playerNo;
 
 
 	// Use this for initialization
@@ -22,17 +23,20 @@ public class PlaneBehaviour : MonoBehaviour {
 	void Update () {
 
 		//Movement
-		if (Input.GetKey (KeyCode.UpArrow))
+		if (Input.GetKey (KeyCode.UpArrow) && playerNo == 1 || Input.GetKey (KeyCode.Keypad8) && playerNo == 2
+		    ||Input.GetKey (KeyCode.W) && playerNo == 3 ||Input.GetKey (KeyCode.O) && playerNo == 4)
 		{
-			//forwardForce = this.transform.right;
+			forwardForce = this.transform.right;
 		}
 		forwardForce = this.transform.right;
-		if(Input.GetKey (KeyCode.LeftArrow))
+		if (Input.GetKey (KeyCode.LeftArrow) && playerNo == 1 || Input.GetKey (KeyCode.Keypad4) && playerNo == 2
+		    ||Input.GetKey (KeyCode.A) && playerNo == 3 ||Input.GetKey (KeyCode.K) && playerNo == 4)
 		{
 			tourqe = tourqeAmount;
 			lastTourqe = tourqeAmount;
 		}
-		if (Input.GetKey (KeyCode.RightArrow))
+		if (Input.GetKey (KeyCode.RightArrow) && playerNo == 1 || Input.GetKey (KeyCode.Keypad6) && playerNo == 2
+		    ||Input.GetKey (KeyCode.D) && playerNo == 3 ||Input.GetKey (KeyCode.Semicolon) && playerNo == 4)
 		{
 			tourqe = -tourqeAmount;
 			lastTourqe = -tourqeAmount;
@@ -72,13 +76,25 @@ public class PlaneBehaviour : MonoBehaviour {
 
 
 		//Dropping bombs
-		if(Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetKey (KeyCode.Space) && playerNo == 1 || Input.GetKey (KeyCode.KeypadEnter) && playerNo == 2
+		    ||Input.GetKey (KeyCode.LeftShift) && playerNo == 3 ||Input.GetKey (KeyCode.RightShift) && playerNo == 4)
 		{
-			GameObject instantiatedObj = (GameObject)Instantiate(Resources.Load("Bomb"),this.transform.position + new Vector3(0.0f, 1.0f, 0.0f), Quaternion.identity);
-			instantiatedObj.GetComponent<ProjectileScript>().setVariables(this.transform.position);
-
+			GameObject instantiatedObj = (GameObject)Instantiate(Resources.Load("Bomb"),this.transform.position + new Vector3(0.0f, 1.0f, 0.0f), this.transform.rotation);
+			instantiatedObj.GetComponent<BombScript>().setVariables(this.transform.position);
 		}
 
+	}
 
+	public void killed()
+	{
+		this.gameObject.SetActive (false);
+		this.gameObject.transform.position = new Vector3(0f, 0f, 0f);
+
+		float time = Time.deltaTime;
+		if (Time.deltaTime < time + 5.0f) 
+		{
+			Debug.Log(Time.deltaTime);
+		}
+		this.gameObject.SetActive(true);
 	}
 }

@@ -15,6 +15,10 @@ public class Asteroid : MonoBehaviour
        
         asteroidBody.mass = Size;
         asteroidTrans.localScale = new Vector3(Size, Size,0.1f);
+		if (this.GetComponent<BoxCollider2D> () == null) 
+		{
+			this.gameObject.AddComponent<BoxCollider2D>();
+		}
         
         Velocity = new Vector3(Velocity.x / Size, Velocity.y / Size, 0);
     }
@@ -29,8 +33,11 @@ public class Asteroid : MonoBehaviour
         //Kill the player if it collides with the asteroid
         else if (other.tag == "Player")
         {
-            //kil player, lives etc
+			other.GetComponent<PlaneBehaviour>().killed();            
+			//kil player, lives etc
         }
+
+		FindObjectOfType<AsteroidManager> ().asteroidSplit (this.gameObject);
         //Call asteroid split here
 
     }

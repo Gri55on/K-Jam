@@ -11,7 +11,6 @@ public class AsteroidManager : MonoBehaviour
     public int amount, split;
     public float minPos, maxPos, minspeed, maxSpeed, minSize;
 
-
     void Start()
     {
         Spawn();
@@ -41,7 +40,7 @@ public class AsteroidManager : MonoBehaviour
     }
 
     //Splits the asteroid and spawns a number of smaller asteroids 
-    void asteroidSplit(GameObject asteroidToSplit)
+    public void asteroidSplit(GameObject asteroidToSplit)
     {
         //Only splits asteroids above a certain size
         if (asteroidToSplit.GetComponent<Asteroid>().Size > minSize)
