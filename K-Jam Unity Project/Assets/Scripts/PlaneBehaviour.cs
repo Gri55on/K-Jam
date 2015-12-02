@@ -76,8 +76,8 @@ public class PlaneBehaviour : MonoBehaviour {
 
 
 		//Dropping bombs
-		if (Input.GetKey (KeyCode.Space) && playerNo == 1 || Input.GetKey (KeyCode.KeypadEnter) && playerNo == 2
-		    ||Input.GetKey (KeyCode.LeftShift) && playerNo == 3 ||Input.GetKey (KeyCode.RightShift) && playerNo == 4)
+		if (Input.GetKeyDown (KeyCode.Space) && playerNo == 1 || Input.GetKeyDown (KeyCode.KeypadEnter) && playerNo == 2
+		    ||Input.GetKeyDown (KeyCode.LeftShift) && playerNo == 3 ||Input.GetKeyDown (KeyCode.RightShift) && playerNo == 4)
 		{
 			GameObject instantiatedObj = (GameObject)Instantiate(Resources.Load("Bomb"),this.transform.position + new Vector3(0.0f, 1.0f, 0.0f), this.transform.rotation);
 			instantiatedObj.GetComponent<BombScript>().setVariables(this.transform.position);

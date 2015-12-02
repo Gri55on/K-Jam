@@ -24,19 +24,42 @@ public class EdgeLoopingScript : MonoBehaviour
 	{
 		if(collision.transform.position.x >= this.transform.position.x + (this.transform.localScale.x/2))
 		{
+			if(collision.tag == "Asteroid")
+			{
+				collision.gameObject.SetActive(false);
+			}
 			collision.transform.position = new Vector3(-(this.transform.localScale.x/2),collision.transform.position.y, 0.0f);
+			if(collision.tag == "Asteroid")
+			{
+			collision.gameObject.SetActive(true);
+			}
 		}
 		else if(collision.transform.position.x <= this.transform.position.x - (this.transform.localScale.x/2))
 		{
+			if(collision.tag == "Asteroid")
+			{
+				collision.gameObject.SetActive(false);
+			}
 			collision.transform.position = new Vector3((this.transform.localScale.x/2),collision.transform.position.y, 0.0f);
+			collision.gameObject.SetActive(true);
 		}
 		else if(collision.transform.position.y >= this.transform.position.y + (this.transform.localScale.y/2))
 		{
+			if(collision.tag == "Asteroid")
+			{
+				collision.gameObject.SetActive(false);
+			}
 			collision.transform.position = new Vector3(collision.transform.position.x,-(this.transform.localScale.y/2), 0.0f);
+			collision.gameObject.SetActive(true);
 		}
 		else if(collision.transform.position.y <= this.transform.position.y - (this.transform.localScale.y/2))
 		{
+			if(collision.tag == "Asteroid")
+			{
+				collision.gameObject.SetActive(false);
+			}
 			collision.transform.position = new Vector3(collision.transform.position.x,(this.transform.localScale.y/2), 0.0f);
+			collision.gameObject.SetActive(true);
 		}
 	}
 

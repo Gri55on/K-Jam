@@ -13,7 +13,7 @@ public class Asteroid : MonoBehaviour
         Rigidbody2D asteroidBody = this.GetComponent<Rigidbody2D>();
         Transform asteroidTrans = this.GetComponent<Transform>(); 
        
-        asteroidBody.mass = Size;
+        //asteroidBody.mass = Size;
         asteroidTrans.localScale = new Vector3(Size, Size,0.1f);
 		if (this.GetComponent<BoxCollider2D> () == null) 
 		{
@@ -23,24 +23,32 @@ public class Asteroid : MonoBehaviour
         Velocity = new Vector3(Velocity.x / Size, Velocity.y / Size, 0);
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         //Destroy bullets that colide with the asteroid
         if ( other.tag == "Bullet")
         {
             Destroy(other.gameObject);
+			FindObjectOfType<AsteroidManager> ().asteroidSplit (this.gameObject);
         }
-        //Kill the player if it collides with the asteroid
-        else if (other.tag == "Player")
-        {
-			other.GetComponent<PlaneBehaviour>().killed();            
+		if (other.tag == "Player")
+		{
+			other.GetComponent<SpaceshipBehaviour>().killed();            
 			//kil player, lives etc
-        }
+			FindObjectOfType<AsteroidManager> ().asteroidSplit (this.gameObject);
+		}
+        //Kill the player if it collides with the asteroid
+       
 
-		FindObjectOfType<AsteroidManager> ().asteroidSplit (this.gameObject);
+
         //Call asteroid split here
 
     }
+
+	void OnColliderEnter2D(Collider2D other)
+	{
+
+	}
 
 	void Update ()
 	{

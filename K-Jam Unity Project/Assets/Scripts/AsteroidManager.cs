@@ -51,6 +51,7 @@ public class AsteroidManager : MonoBehaviour
                 GameObject addedAsteroid = GameObject.Instantiate(asteroid, asteroidToSplit.transform.position, Quaternion.identity) as GameObject;
                 //Sets the size of new asteroid to be half the size of the parent
                 addedAsteroid.GetComponent<Asteroid>().Size = (asteroidToSplit.GetComponent<Asteroid>().Size / 2);
+				addedAsteroid.GetComponent<Asteroid>().Velocity = (RandomVel());
                 asteroidList.Add(addedAsteroid);
 
             }

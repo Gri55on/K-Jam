@@ -8,6 +8,7 @@ public class SpaceshipBehaviour : MonoBehaviour {
 	float tourqeAmount;
 	float lastTourqe;
 	public float xr,yr;
+	public int playerNo;
 	
 	// Use this for initialization
 	void Start () {
@@ -23,21 +24,26 @@ public class SpaceshipBehaviour : MonoBehaviour {
 	void Update () {
 		
 		//Movement
-		if (Input.GetKey (KeyCode.UpArrow))
+		if (Input.GetKey (KeyCode.UpArrow) && playerNo == 1 || Input.GetKey (KeyCode.Keypad8) && playerNo == 2
+		    ||Input.GetKey (KeyCode.W) && playerNo == 3 ||Input.GetKey (KeyCode.O) && playerNo == 4)
+		{
 		{
 			forwardForce = this.transform.right;
 		}
-		if(Input.GetKey (KeyCode.LeftArrow))
+		if (Input.GetKey (KeyCode.LeftArrow) && playerNo == 1 || Input.GetKey (KeyCode.Keypad4) && playerNo == 2
+			 ||Input.GetKey (KeyCode.A) && playerNo == 3 ||Input.GetKey (KeyCode.K) && playerNo == 4)
+			
 		{
 			tourqe = tourqeAmount;
 		}
-		if (Input.GetKey (KeyCode.RightArrow))
-		{
+		if (Input.GetKey (KeyCode.RightArrow) && playerNo == 1 || Input.GetKey (KeyCode.Keypad6) && playerNo == 2
+			    ||Input.GetKey (KeyCode.D) && playerNo == 3 ||Input.GetKey (KeyCode.Semicolon) && playerNo == 4)
 			tourqe = -tourqeAmount;
 		}
 
 		//Hyperspace
-		if (Input.GetKeyDown (KeyCode.DownArrow)) 
+		if (Input.GetKeyDown (KeyCode.DownArrow) && playerNo == 1 || Input.GetKeyDown (KeyCode.Keypad5) && playerNo == 2
+		    ||Input.GetKeyDown (KeyCode.S) && playerNo == 3 ||Input.GetKeyDown (KeyCode.L) && playerNo == 4)
 		{
 			transform.position = new Vector3(xr,yr,0.0f);
 			xr = Random.Range(-4.5f, 4.5f);
@@ -78,15 +84,25 @@ public class SpaceshipBehaviour : MonoBehaviour {
 		}
 
 		//Shooting Bullet
-		if(Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetKeyDown (KeyCode.Space) && playerNo == 1 || Input.GetKeyDown (KeyCode.KeypadEnter) && playerNo == 2
+		    ||Input.GetKeyDown (KeyCode.LeftShift) && playerNo == 3 ||Input.GetKeyDown (KeyCode.RightShift) && playerNo == 4)
 		{
 			GameObject instantiatedObj = (GameObject)Instantiate(Resources.Load("Bullet"),this.transform.position, this.transform.rotation);
 			instantiatedObj.GetComponent<ProjectileScript>().direction = Vector3.Normalize(this.transform.right);			
 		}
-
-
-
 		
+	}
+
+	public void killed()
+	{
+		this.gameObject.SetActive (false);
+		this.gameObject.transform.position = new Vector3(0f, 0f, 0f);
 		
+		float time = Time.deltaTime;
+		if (Time.deltaTime < time + 5.0f) 
+		{
+			Debug.Log(Time.deltaTime);
+		}
+		this.gameObject.SetActive(true);
 	}
 }
